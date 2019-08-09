@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<div class="col-sm-6 mx-auto">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Home Page</h3>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:green;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </div>
+            </div>
+            </div>
+{% endblock %}

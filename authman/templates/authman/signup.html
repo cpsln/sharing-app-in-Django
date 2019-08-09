@@ -1,0 +1,82 @@
+{% extends "base_template.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="col-sm-6 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Signup</h3>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:Red;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form method="post" class="form-horizontal">
+                        {% csrf_token %}
+                    
+                        {# Include the hidden fields #}
+                        {% for hiddenField in form.hidden_fields %}
+                            {{ hiddenField }}
+                        {% endfor %}
+                    
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-warning">{{ form.non_field_errors }}</div>
+                        {% endif %}
+                    
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form.username.errors }}
+                                <label class="control-label" for="{{ form.username.id_for_label }}">{{form.username.label}}</label>
+                                {{ form.username}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form.first_name.errors }}
+                                <label class="control-label" for="{{ form.first_name.id_for_label }}">First Name</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.last_name.errors }}
+                                <label class="control-label" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                {{ form.last_name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form.password1.errors }}
+                                <label class="control-label" for="{{ form.password1.id_for_label }}">{{form.password1.label}}</label>
+                                {{ form.password1}}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.password2.errors }}
+                                <label class="control-label" for="{{ form.password2.id_for_label }}">Retype password</label>
+                                {{ form.password2 }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form.email.errors }}
+                                <label class="control-label" for="{{ form.email.id_for_label }}" >Email</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {{ form.user_type.errors }}
+                                <label class="control-label" for="{{ form.user_type.id_for_label }}" >User Type</label>
+                                {{ form.user_type }}
+                            </div>
+                        </div>
+                    
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Signup</button>
+                        </div>
+                    
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
